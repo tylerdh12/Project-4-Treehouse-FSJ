@@ -7,6 +7,7 @@ let letter;
 let gameOverMessage = document.getElementById('game-over-message');
 let keys = document.getElementsByClassName('key');
 let lives = document.querySelectorAll('.tries img');
+phraseLetters = document.querySelectorAll('li.letter');
 let gameStatus;
 let phrase;
 const wonMessage = 'Congratulations You Have Won!!';
@@ -67,16 +68,14 @@ class Game{
     index.disabled = true;
     letter = index.innerHTML;
     console.log(letter);
-    // checkLetter(letter);
   };
-
-
 
   /**
   * Checks for winning move
   * @return {boolean} True if game has been won, false if game wasn't
   won
   */
+
   checkForWin(){
     // this is a missed counter for a game over on loss of lives
     if (game.missed < 4){
@@ -107,9 +106,6 @@ class Game{
   };
 
 }
-
-
-
 
  // Game.js to create a Game class methods for starting and ending the game, handling
  // interactions, getting a random phrase, checking for a win, and removing a life from the

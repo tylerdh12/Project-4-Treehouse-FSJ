@@ -18,7 +18,7 @@
          $('#phrase ul').append(`<li class="space"> </li>`);
        } else{
          let lowerLetter = randomPhrase[char].toLowerCase();
-         $('#phrase ul').append(`<li class="letter">${lowerLetter}</li>`);
+         $('#phrase ul').append(`<li class="hide letter ${lowerLetter}">${lowerLetter}</li>`);
        }
      };
   };
