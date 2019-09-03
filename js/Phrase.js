@@ -3,22 +3,22 @@
  * Phrase.js */
 
  class Phrase{
-   constructor(randomPhrase){
-     this.phrase = this.randomPhrase;
+   constructor(phrase){
+     this.phrase;
    }
 
    addPhraseToDisplay(){
 
-     game.activePhrase = randomPhrase.toLowerCase();
+     game.activePhrase = phrase.phrase.toLowerCase();
 
      let char;
 
-     for (char in randomPhrase){
-       if(randomPhrase[char] === " "){
+     for (char in game.activePhrase){
+       if(game.activePhrase[char] === " "){
          $('#phrase ul').append(`<li class="space"> </li>`);
        } else{
-         let lowerLetter = randomPhrase[char].toLowerCase();
-         $('#phrase ul').append(`<li class="hide letter ${lowerLetter}">${lowerLetter}</li>`);
+         let lowerLetter = game.activePhrase[char];
+         $('#phrase ul').append(`<li class="letter ${lowerLetter}">${lowerLetter}</li>`);
        }
      };
   };
@@ -28,19 +28,13 @@
   * @param (string) letter - Letter to check
   */
   checkLetter(letter){
-    phraseLetters = document.querySelectorAll('li.letter');
-    //  for letters of phrase check input value to phrase chars
-    //  if letter does match run showMatchedLetter(letter)
-    //  if letter doesnt match remove life
-    // console.log(letter);
+    console.log(letter);
 
-    for(let i = 0; i < phraseLetters.length; i++){
-      if(phraseLetters[i].innerHTML === letter){
-        this.showMatchedLetter(i)
+      if($('.letter').hasClass(letter)){
+        this.addClass('show');
       } else {
         game.removeALife();
       }
-    }
 
   };
 
@@ -49,7 +43,7 @@
   * @param (string) letter - Letter to display
   */
   showMatchedLetter(letter){
-    phraseLetters[letter].classList.add("show");
+    $('.letter').classList.add("show");
     //  display the char of the corresponding letters check if game is won
   };
 

@@ -1,24 +1,54 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
-let phraseLetters;
+
+ // Global Variables
 let randomPhrase;
 let letter;
-let gameOverMessage = document.getElementById('game-over-message');
-let keys = document.getElementsByClassName('key');
-let lives = document.querySelectorAll('.tries img');
-phraseLetters = document.querySelectorAll('li.letter');
 let gameStatus;
+let randomNum;
 let phrase;
+
+// Global Functions
+function randomPhraseNum() {
+  let randomNum = Math.floor( Math.random() * phrases.length);
+  return randomNum;
+}
+
+// Document Selectors
+let gameOverMessage = $('#game-over-message');
+let keys = $('.key');
+let lives = $('.tries img');
+
+// Messages
 const wonMessage = 'Congratulations You Have Won!!';
 const lostMessage = 'Sorry you have run out of lives. Please Try Aagain!';
 
+// Phrase Objects
+const phrases = [
+  {
+    phrase : "Curiosity Killed The Cat",
+  },
+  {
+    phrase : "A Dime a Dozen",
+  },
+  {
+    phrase : "Piece of Cake",
+  },
+  {
+    phrase : "Close But No Cigar",
+  },
+  {
+    phrase : "Cup of Joe",
+  },
+];
+
+// Opening to Game Class
 class Game{
  constructor(){
    this.missed = 0;
-   this.activePhrase = null;
-   this.phrases = ["Curiosity Killed The Cat", "A Dime a Dozen", "Piece of Cake", "Close But No Cigar", "Cup of Joe"];
    this.phrase = this.getRandomPhrase();
+   this.activePhrase = null;
  };
 
   /**
@@ -26,9 +56,10 @@ class Game{
   * @return {Object} Phrase object chosen to be used
   */
   getRandomPhrase(){
-    const randomized = Math.floor( Math.random() * this.phrases.length );
-    return randomPhrase = this.phrases[randomized];
-    game.activePhrase = randomPhrase.toLowerCase();
+    randomPhraseNum();
+    phrase = phrases[randomPhraseNum()];
+    this.activePhrase = phrase;
+    return phrase;
   };
 
   /**
@@ -40,8 +71,7 @@ class Game{
     game = new Game();
     $('#overlay').hide();
     this.resetGame();
-    const randomPhrase = this.getRandomPhrase();
-    const phrase = new Phrase(randomPhrase);
+    let phrase = new Phrase();
     phrase.addPhraseToDisplay();
   };
 
@@ -67,7 +97,7 @@ class Game{
     index.classList.add('chosen');
     index.disabled = true;
     letter = index.innerHTML;
-    console.log(letter);
+    phrase.checkLetter(letter);
   };
 
   /**
@@ -94,6 +124,7 @@ class Game{
     //  change liveHeart.png to lostHeart.png
     lives[this.missed].src='images/lostHeart.png';
     return this.missed ++;
+    this.checkForWin();
   };
 
   resetGame(){
@@ -107,6 +138,10 @@ class Game{
 
 }
 
+
+function newFunction() {
+  Phrase.checkLetter(letter);
+}
  // Game.js to create a Game class methods for starting and ending the game, handling
  // interactions, getting a random phrase, checking for a win, and removing a life from the
  // scoreboard.
