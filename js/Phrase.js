@@ -4,20 +4,18 @@
 
  class Phrase{
    constructor(phrase){
-     this.phrase;
+     this.phrase = phrase.toLowerCase();
    }
 
    addPhraseToDisplay(){
 
-     game.activePhrase = phrase.phrase.toLowerCase();
-
      let char;
 
-     for (char in game.activePhrase){
-       if(game.activePhrase[char] === " "){
+     for (char in game.activePhrase.phrase){
+       if(game.activePhrase.phrase[char] === " "){
          $('#phrase ul').append(`<li class="space"> </li>`);
        } else{
-         let lowerLetter = game.activePhrase[char];
+         let lowerLetter = game.activePhrase.phrase[char];
          $('#phrase ul').append(`<li class="letter ${lowerLetter}">${lowerLetter}</li>`);
        }
      };
@@ -30,8 +28,10 @@
   checkLetter(letter){
     console.log(letter);
 
+    let check = ".letter." + letter;
+
       if($('.letter').hasClass(letter)){
-        this.addClass('show');
+        $(check).addClass('show');
       } else {
         game.removeALife();
       }

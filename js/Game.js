@@ -9,12 +9,6 @@ let gameStatus;
 let randomNum;
 let phrase;
 
-// Global Functions
-function randomPhraseNum() {
-  let randomNum = Math.floor( Math.random() * phrases.length);
-  return randomNum;
-}
-
 // Document Selectors
 let gameOverMessage = $('#game-over-message');
 let keys = $('.key');
@@ -24,30 +18,17 @@ let lives = $('.tries img');
 const wonMessage = 'Congratulations You Have Won!!';
 const lostMessage = 'Sorry you have run out of lives. Please Try Aagain!';
 
-// Phrase Objects
-const phrases = [
-  {
-    phrase : "Curiosity Killed The Cat",
-  },
-  {
-    phrase : "A Dime a Dozen",
-  },
-  {
-    phrase : "Piece of Cake",
-  },
-  {
-    phrase : "Close But No Cigar",
-  },
-  {
-    phrase : "Cup of Joe",
-  },
-];
-
 // Opening to Game Class
 class Game{
  constructor(){
    this.missed = 0;
-   this.phrase = this.getRandomPhrase();
+   this.phrases = [
+      new Phrase ("Curiosity Killed The Cat"),
+      new Phrase ("A Dime a Dozen"),
+      new Phrase ("Piece of Cake"),
+      new Phrase ("Close But No Cigar"),
+      new Phrase ("Cup of Joe")
+    ];
    this.activePhrase = null;
  };
 
@@ -56,10 +37,7 @@ class Game{
   * @return {Object} Phrase object chosen to be used
   */
   getRandomPhrase(){
-    randomPhraseNum();
-    phrase = phrases[randomPhraseNum()];
-    this.activePhrase = phrase;
-    return phrase;
+    return this.phrases[Math.floor( Math.random() * this.phrases.length)];
   };
 
   /**
@@ -68,11 +46,10 @@ class Game{
   * sends new random phrase to the addPhraseToDisplay()
   **/
   startGame(){
-    game = new Game();
     $('#overlay').hide();
     this.resetGame();
-    let phrase = new Phrase();
-    phrase.addPhraseToDisplay();
+    this.activePhrase = this.getRandomPhrase();
+    this.activePhrase.addPhraseToDisplay();
   };
 
   /**
@@ -97,7 +74,7 @@ class Game{
     index.classList.add('chosen');
     index.disabled = true;
     letter = index.innerHTML;
-    phrase.checkLetter(letter);
+    this.activePhrase.checkLetter(letter);
   };
 
   /**
@@ -108,10 +85,8 @@ class Game{
 
   checkForWin(){
     // this is a missed counter for a game over on loss of lives
-    if (game.missed < 4){
-      this.removeALife();
-    } else {
-      this.gameOver('lost');
+    if (this.missed == 5){
+      game.gameOver('lost');
     }
   };
 
@@ -123,7 +98,7 @@ class Game{
   removeALife(){
     //  change liveHeart.png to lostHeart.png
     lives[this.missed].src='images/lostHeart.png';
-    return this.missed ++;
+    this.missed ++;
     this.checkForWin();
   };
 
@@ -131,9 +106,10 @@ class Game{
     for(let i = 0; i < lives.length; i++){
       lives[i].src='images/liveHeart.png';
     }
-
     $('#game-over-message').empty();
     $('#phrase ul').empty();
+    $('.key').removeClass('chosen');
+    $('.key').disabled = false;
   };
 
 }
