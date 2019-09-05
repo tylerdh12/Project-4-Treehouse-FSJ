@@ -18,7 +18,7 @@
  
  ### Live Deployment
  - This project is hosted live using Netlify and github
-  -- this project can be used/viewed at: https://gameshow.jsstack.dev
+   - Project can be used/viewed at: https://gameshow.jsstack.dev
  
  ### Version
   v.0.8 Beta
