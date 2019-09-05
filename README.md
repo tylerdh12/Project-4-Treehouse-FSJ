@@ -9,11 +9,6 @@
  - [x] Download the project files from the treehouse project start page
  - [x] Create Github Repository
  - [x] Create a README.md file
- - [ ] 
- - [ ] 
- - [ ] 
- - [ ] 
- - [ ] 
  
  ### Installation or Dependencies
  
@@ -27,7 +22,7 @@
  
  ### Version
   v.0.8 Beta
-  !!!---- Need to Understand Versioning better to get this correct but is still under work at this moment ----!!!
+   - !!!---- Need to Understand Versioning better to get this correct but is still under work at this moment ----!!!
   
   ### Author
   [Tyler Harper](https://resume.jsstack.dev/)
