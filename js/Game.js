@@ -72,7 +72,6 @@ class Game{
   */
   handleInteraction(index){
     index.classList.add('chosen');
-    index.disabled = true;
     letter = index.innerHTML;
     this.activePhrase.checkLetter(letter);
   };
@@ -87,6 +86,8 @@ class Game{
     // this is a missed counter for a game over on loss of lives
     if (this.missed == 5){
       game.gameOver('lost');
+    } else if ($('.letter.show').length == $('.letter').length){
+      game.gameOver('won');
     }
   };
 
@@ -99,25 +100,21 @@ class Game{
     //  change liveHeart.png to lostHeart.png
     lives[this.missed].src='images/lostHeart.png';
     this.missed ++;
-    this.checkForWin();
   };
 
   resetGame(){
     for(let i = 0; i < lives.length; i++){
       lives[i].src='images/liveHeart.png';
     }
+
     $('#game-over-message').empty();
     $('#phrase ul').empty();
     $('.key').removeClass('chosen');
-    $('.key').disabled = false;
   };
 
 }
 
 
-function newFunction() {
-  Phrase.checkLetter(letter);
-}
  // Game.js to create a Game class methods for starting and ending the game, handling
  // interactions, getting a random phrase, checking for a win, and removing a life from the
  // scoreboard.

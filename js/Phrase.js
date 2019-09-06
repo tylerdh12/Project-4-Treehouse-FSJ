@@ -26,7 +26,6 @@
   * @param (string) letter - Letter to check
   */
   checkLetter(letter){
-    console.log(letter);
 
     let check = ".letter." + letter;
 
@@ -36,6 +35,7 @@
         game.removeALife();
       }
 
+    game.checkForWin();
   };
 
   /**
