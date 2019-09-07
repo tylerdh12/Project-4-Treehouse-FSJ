@@ -16,7 +16,7 @@ let lives = $('.tries img');
 
 // Messages
 const wonMessage = 'Congratulations You Have Won!!';
-const lostMessage = 'Sorry you have run out of lives. Please Try Aagain!';
+const lostMessage = 'Sorry you have run out of lives. Please Try Again!';
 
 // Opening to Game Class
 class Game{
@@ -59,10 +59,10 @@ class Game{
   gameOver(gameStatus){
     if (gameStatus === 'won'){
       gameOverMessage.append(wonMessage);
-      $('#overlay').show();
+      $('#overlay').show().addClass('win');
     } else if(gameStatus === 'lost') {
       gameOverMessage.append(lostMessage);
-      $('#overlay').show();
+      $('#overlay').show().addClass('lose');
     }
   };
 
@@ -71,9 +71,7 @@ class Game{
   * @param {string} innerHTML of keyboard buttons
   */
   handleInteraction(index){
-    index.classList.add('chosen');
-    letter = index.innerHTML;
-    this.activePhrase.checkLetter(letter);
+    this.activePhrase.checkLetter(index);
   };
 
   /**
@@ -85,9 +83,9 @@ class Game{
   checkForWin(){
     // this is a missed counter for a game over on loss of lives
     if (this.missed == 5){
-      game.gameOver('lost');
+      setTimeout(game.gameOver, 500, 'lost' );
     } else if ($('.letter.show').length == $('.letter').length){
-      game.gameOver('won');
+    setTimeout(game.gameOver, 500, 'won' );
     }
   };
 
@@ -107,14 +105,10 @@ class Game{
       lives[i].src='images/liveHeart.png';
     }
 
+    $('#overlay').removeClass('lose win');
     $('#game-over-message').empty();
     $('#phrase ul').empty();
-    $('.key').removeClass('chosen');
+    $('.key').removeClass('chosen wrong');
   };
 
 }
-
-
- // Game.js to create a Game class methods for starting and ending the game, handling
- // interactions, getting a random phrase, checking for a win, and removing a life from the
- // scoreboard.

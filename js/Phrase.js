@@ -25,13 +25,17 @@
   * Checks to see if the key clicked matches any chars of randomPhrase
   * @param (string) letter - Letter to check
   */
-  checkLetter(letter){
+  checkLetter(index){
+
+    letter = index.innerHTML;
 
     let check = ".letter." + letter;
 
       if($('.letter').hasClass(letter)){
-        $(check).addClass('show');
+        this.showMatchedLetter(check);
+        index.classList.add('chosen');
       } else {
+        index.classList.add('wrong');
         game.removeALife();
       }
 
@@ -43,7 +47,7 @@
   * @param (string) letter - Letter to display
   */
   showMatchedLetter(letter){
-    $('.letter').classList.add("show");
+    $(letter).addClass('show');
     //  display the char of the corresponding letters check if game is won
   };
 
