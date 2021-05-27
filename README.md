@@ -16,12 +16,11 @@
  ## Additional Information
  
  ### Live Deployment
- - This project is hosted live using Netlify and github
-   - Project can be used/viewed at: https://gameshow.jsstack.dev
+ - This project is hosted using Netlify and uses github to trigger the build process
+   - Project can be used/viewed at: https://gameshow.tylerharper.dev
  
  ### Version
   v.1 Beta
-   - !!!---- Need to Understand Versioning better ----!!!
   
-  ### Author
-  [Tyler Harper](https://resume.jsstack.dev/)
+### Author
+[Tyler Harper](https://tylerharper.dev.dev/)
